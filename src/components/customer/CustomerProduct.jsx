@@ -46,7 +46,7 @@ const dispatch = useDispatch();
       {/* Image Section */}
       <div className="flex justify-center items-center mb-3 bg-white rounded-lg p-2">
         <img
-          src={`http://localhost:3001/${p.photoUrl.replace("\\", "/")}`}
+          src={`https://singhstorebackend.onrender.com/${p.photoUrl.replace("\\", "/")}`}
           alt={p.name}
           className="max-h-48 w-auto object-contain rounded-md"
         />
