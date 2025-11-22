@@ -8,7 +8,7 @@ const initialState={
 
 export const fetchSellerProducts=createAsyncThunk('seller/fetchSellerProducts',async ()=>{
     const token=localStorage.getItem('token');
-    const response=await fetch("http://localhost:3001/api/seller/products",{
+    const response=await fetch("https://singhstorebackend.onrender.com/api/seller/products",{
         headers : {
             Authorization : `Bearer ${token}`,
         },

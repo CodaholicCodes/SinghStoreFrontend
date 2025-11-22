@@ -15,7 +15,7 @@ const dispatch = useDispatch();
     <div className="flex items-center gap-4 bg-white rounded-lg p-3 shadow-sm">
       <div className="flex-shrink-0">
         <img
-          src={`http://localhost:3001/${p.photoUrl.replace("\\", "/")}`}
+          src={`https://singhstorebackend.onrender.com/${p.photoUrl.replace("\\", "/")}`}
           alt={p.name}
           className="w-20 h-20 object-contain rounded-md"
         />
