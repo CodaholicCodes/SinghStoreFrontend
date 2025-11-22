@@ -13,24 +13,30 @@ export const fetchCustomerData = createAsyncThunk(
     async (_, thunkAPI) => {
         try {
             const token = localStorage.getItem('token');
-            if (!token) {
-                // don't send request without token; return a clear error for UI
-                return thunkAPI.rejectWithValue('No auth token');
-            }
-            const response = await fetch('https://singhstorebackend.onrender.com/api/customer/data', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            if (token) {
+                const response = await fetch('http://localhost:3001/api/customer/data', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
 
-            if (!response.ok) {
-                const text = await response.text().catch(() => response.statusText);
-                return thunkAPI.rejectWithValue(text || `Status ${response.status}`);
-            }
+                if (!response.ok) {
+                    const text = await response.text().catch(() => response.statusText);
+                    return thunkAPI.rejectWithValue(text || `Status ${response.status}`);
+                }
 
-            return await response.json();
+                return await response.json();
+            } else {
+                
+                const response = await fetch('http://localhost:3001/api/products');
+                if (!response.ok) {
+                    const text = await response.text().catch(() => response.statusText);
+                    return thunkAPI.rejectWithValue(text || `Status ${response.status}`);
+                }
+                const data = await response.json();
+                return { products: data.products || [], orders: [], carts: [] };
+            }
         } catch (err) {
-          
             return thunkAPI.rejectWithValue(err.message || 'Network error');
         }
     }
@@ -46,7 +52,7 @@ export const placeOrder = createAsyncThunk(
             if (!token) {
                 return thunkAPI.rejectWithValue('No auth token');
             }
-            const response = await fetch('https://singhstorebackend.onrender.com/api/customer/order', {
+            const response = await fetch('http://localhost:3001/api/customer/order', {
                 method : 'POST',
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -70,7 +76,7 @@ export const placeOrder = createAsyncThunk(
 
 export const addToCart=createAsyncThunk('customer/addToCart',async (productId)=>{
     const token=localStorage.getItem('token');
-    const response=await fetch(`https://singhstorebackend.onrender.com/api/customer/carts/${productId}`,{
+    const response=await fetch(`http://localhost:3001/api/customer/carts/${productId}`,{
         method :'POST',
         headers : {
             Authorization : `Bearer ${token}`,
@@ -88,7 +94,7 @@ export const addToCart=createAsyncThunk('customer/addToCart',async (productId)=>
 
 export const removeFromCart=createAsyncThunk('customer/removeFromCart',async (productId)=>{
     const token=localStorage.getItem('token');
-    const response=await fetch(`https://singhstorebackend.onrender.com/api/customer/carts/${productId}`,{
+    const response=await fetch(`http://localhost:3001/api/customer/carts/${productId}`,{
     method :'DELETE',
         headers : {
             Authorization : `Bearer ${token}`,

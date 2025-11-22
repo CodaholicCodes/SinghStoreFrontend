@@ -11,7 +11,7 @@ const SellerHome = () => {
 
   const handleDeleteProduct = async (productId) => {  
 const token=localStorage.getItem('token');
-   const response =await fetch(`https://singhstorebackend.onrender.com/api/seller/products/${productId}`, {
+   const response =await fetch(`http://localhost:3001/api/seller/products/${productId}`, {
       method: 'DELETE',
       headers : {
         Authorization : `Bearer ${token}`

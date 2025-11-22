@@ -25,7 +25,7 @@ const AddProduct = () => {
     formData.append("description", descRef.current.value);
     formData.append("image", imageRef.current.files[0]);
 
-    fetch("https://singhstorebackend.onrender.com/api/seller/products", {
+    fetch("http://localhost:3001/api/seller/products", {
       method: 'POST',
       body: formData,
       headers : {

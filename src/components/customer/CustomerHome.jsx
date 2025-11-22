@@ -14,11 +14,8 @@ const CustomerHome = () => {
  
 
   useEffect(() => {
-    // only fetch customer data when we have a token
-    const t = token || localStorage.getItem('token');
-    if (t) {
-      dispatch(fetchCustomerData());
-    }
+    // fetch customer data or public products regardless of auth state
+    dispatch(fetchCustomerData());
   }, [dispatch, token, isLoggedIn]);
 
   if (isLoading) return <div className="text-center mt-10">Loading...</div>;

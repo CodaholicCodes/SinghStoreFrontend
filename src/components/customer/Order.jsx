@@ -47,7 +47,7 @@ const Order = ({ order, products}) => {
             <div key={p._id} className="flex items-center gap-4">
               <div className="w-16 h-16 bg-gray-100 rounded-md flex items-center justify-center overflow-hidden">
                 {typeof p.photoUrl === 'string' && p.photoUrl ? (
-                  <img src={`https://singhstorebackend.onrender.com/${String(p.photoUrl).replace(/\\/g, '/').replace(/^\//, '')}`} alt={p.name || 'product'} className="w-full h-full object-contain" />
+                  <img src={`http://localhost:3001/${String(p.photoUrl).replace(/\\/g, '/').replace(/^\//, '')}`} alt={p.name || 'product'} className="w-full h-full object-contain" />
                 ) : (
                   <div className="text-xs text-gray-400">No image</div>
                 )}
